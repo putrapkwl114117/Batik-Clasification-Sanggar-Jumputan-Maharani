@@ -1,0 +1,299 @@
+body{
+     background-color: #c9c7cf;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.navbar-custom {
+    position: fixed;
+    top: 0; 
+    width: 100%; 
+     background: linear-gradient(to right, #724ef5, #022e5a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); 
+    border-bottom: 3px solid #402e91; 
+    z-index: 1000; 
+}
+        .navbar-custom .nav-link {
+            color: #FFFFFF; 
+        }
+
+        .navbar-custom .nav-link.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .banner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to right, #7981f3, #074e96);
+            color: white;
+        }
+
+        .banner .text-section {
+            flex: 1;
+            margin-left: 7%;
+            margin-top: 6%;
+            max-width: 50%;
+        }
+
+        .banner h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .banner p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .btn-custom {
+            background-color: #FFC300;
+            border: none;
+            font-weight: bold;
+            color: #002B5B;
+        }
+
+        .btn-custom:hover {
+            background-color: #FFAA00;
+        }
+
+        /* Image Section */
+.image-section img {
+    width: 600px;
+    height: 500px;
+    object-fit: cover;
+}
+
+
+/* Section Container */
+.steps {
+    background-color: #000; /* Hitam */
+    padding: 40px 20px;
+    color: #fff; /* Putih */
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffd700; /* Kuning */
+    margin-bottom: 20px;
+}
+
+/* Step Items */
+.step-item {
+    margin-bottom: 40px;
+    
+}
+
+.step-icon {
+    margin-top: 8%;
+    font-size: 3rem;
+    color: #ffd700; /* Kuning */
+    margin-bottom: 15px;
+}
+
+.step-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+
+.step-desc {
+    font-size: 0.9rem;
+    color: #ffd700; 
+    line-height: 1.5;
+}
+
+       
+
+
+        
+
+
+.upload-container {
+    background-color:rgb(232, 228, 248); 
+    border: 1px solid #ddd;
+    height: 350px; /* Tinggi card upload */
+}
+
+.upload-area {
+    border: 3px dashed #6c757d;
+    padding: 40px;
+    text-align: center;
+    max-width: 47%;
+    border-radius: 12px;
+    flex-direction: column;  /* Membuat elemen dalam area upload tersusun vertikal */
+    justify-content: space-between;
+    position: relative;
+    display: flex;
+    justify-content: center;
+     background-color:rgb(204, 200, 221); 
+    align-items: center;
+    height: 200px;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background-color: #e9ecef;
+}
+
+.upload-label {
+    font-size: 16px;
+    color: #6c757d;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upload-area i {
+    font-size: 50px;
+    color: #ffb84d;
+    margin-bottom: 10px;
+}
+
+.file-input {
+    display: none; /* Menyembunyikan input file */
+}
+
+
+.browse-btn {
+    margin-top: 18px; /* Menambahkan jarak antara drag&drop area dan tombol */
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.btn-warning{
+    justify-content: center;
+    margin-left: 14%;
+    border: 10px;
+    width: 20%;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+
+.browse-btn:hover {
+    background-color: #0056b3;
+}
+
+
+.prediction-container {
+     background-color:rgb(232, 228, 248); 
+    border: 2px solid #f5f5f5;
+    box-shadow: -4px 0 18px rgba(0, 0, 0, 0.2);
+    max-width: 50%;
+    height: 100%; /* Tinggi sama dengan card upload */
+    top: 30%;
+    border-radius: 5px;
+    margin-left: 25%;
+    transform: translate(-50%, -30%);
+    z-index: 1;
+}
+
+
+.prediction-container i {
+    margin-top: 25%;
+    font-size: 100px;
+}
+
+.table-responsive {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+/* Styling untuk card utama */
+.container1 {
+    width: 100%; /* Memenuhi lebar layar */
+    max-width: 100%; /* Pastikan tidak ada batas maksimum */
+    margin: 0; /* Menghapus margin */
+    background-color: #c9c7cf;
+    height: auto; /* Menyesuaikan tinggi otomatis sesuai konten */
+    padding: 20px; /* Spasi dalam card */
+}
+
+
+
+/* Styling untuk chart container */
+.chart-container {
+    flex: 1;
+    max-width: 26%; /* Mengatur ukuran */
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+     background-color:rgb(225, 223, 236); 
+    text-align: center;
+}
+
+/* Total Klasifikasi Styling */
+.total-classifications .card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column; /* Menumpuk di layar kecil */
+        align-items: stretch;
+    }
+    .chart-container, .total-classifications {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Header text styling */
+h3.text-warning {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+
+
+
+
+        /* Berikan efek shadow dan transisi */
+canvas {
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Tata Letak Horizontal */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* Jarak antar chart */
+}
+
+
+/* Efek hover pada canvas */
+canvas {
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    width: 50%; /* Mengikuti lebar container */
+    height: auto;
+}
+
+/* Header styling */
+h3.text-warning {
+    margin-bottom: 20px;
+}

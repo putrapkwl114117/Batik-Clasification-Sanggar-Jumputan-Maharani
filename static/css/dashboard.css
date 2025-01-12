@@ -1,0 +1,108 @@
+body {
+          height: 100vh;
+          overflow: hidden;
+          background-color:  #f1eefd;
+            font-family: 'Arial', sans-serif; 
+}
+
+
+    .card {
+        transition: transform 0.2s;
+    }
+    .card:hover {
+        transform: scale(1.02);
+    }
+
+/* Styling untuk card */
+.custom-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan halus */
+    margin: 10px;
+    background-color: #f8f9fa; /* Warna latar belakang terang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Set tinggi card */
+}
+
+/* Menjaga gambar tetap responsive dan dengan ukuran yang sama */
+.custom-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Memastikan gambar tidak terdistorsi */
+    border-radius: 8px;
+}
+
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+     background: linear-gradient(to right, #201252,  #c2b4f3);
+    color: white;
+    transition: all 0.3s;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px solid #b093ff; /* Border di sisi kanan */
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2); /* Efek shadow di sisi kanan */
+    border-top-right-radius: 12px; /* Radius di kanan atas */
+    border-bottom-right-radius: 12px; /* Radius di kanan bawah */
+}
+
+
+#sidebar.collapsed {
+          margin-left: -250px;
+}
+
+#sidebar a {
+          color: white;
+          text-decoration: none;
+          padding: 10px 15px;
+}
+
+/* Hover Effect */
+#sidebar ul li a:hover,
+.logout-icon a:hover {
+    color: #fff; /* Warna putih saat hover */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.content {
+          margin-left: 2px;
+          transition: all 0.3s;
+          height: 100vh;
+          overflow-y: auto;
+}
+
+.content.collapsed {
+          margin-left: 0;
+}
+
+/* Styling untuk navbar */
+.custom-navbar {
+    background-color: #e3ddfd; 
+    border-bottom: 2px solid #ddd; /* Border bawah navbar */
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1); /* Efek shadow halus di bawah navbar */
+}
+
+/* Styling untuk tombol dan ikon di navbar */
+.custom-navbar .btn {
+    color: white;
+}
+
+.custom-navbar .form-control {
+    border-radius: 20px; /* Mengubah border input search */
+}
+
+/* Styling untuk ikon user */
+.custom-navbar .fa-user-circle {
+    color: white;
+}
+
+
+.logout-icon {
+          margin-top: auto;
+          padding: 10px 15px;
+}

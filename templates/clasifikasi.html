@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Galeri Batik</title>
+
+          <!-- Mengimpor Bootstrap -->
+        <!-- Favicon -->
+        <link rel="icon" href="{{ url_for('static', filename='uploadsImg/logo.png') }}" type="image/x-icon">
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/clasifikasi.css') }}">
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+        <a class="navbar-brand text-white" href="/">SANGGAR JUMPUTAN<br>MAHARANI</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">CLASIFIKASI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ANALYTICS</a>
+                </li>
+            </ul>
+            <a href="#" class="text-white ms-auto">
+                <i class="fas fa-shopping-cart"></i> KERANJANG
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Banner Section -->
+<section class="banner">
+    <div class="text-section">
+        <h1>Cari Batikmu, <br>Dengan Gambar.</h1>
+        <p>Temukan beragam Batik sesuai klasifikasi gambar yang memberikan <br> pengetahuan dan preferensi baru.</p>
+        <button class="btn btn-custom mt-3" onclick="location.href='#upload-section'">Clasifikasi Now</button>
+    </div>
+    <div class="image-section">
+        <img src="{{ url_for('static', filename='uploadsImg/imgbatik1.jpg') }}" alt="Klasifikasi Gambar">
+    </div>
+</section>
+
+
+<section class="steps">
+    <div class="container text-center">
+        <h2 class="section-title">Menemukan product kesukaan anda <br> menjadi lebih mudah dan efisien.</h2>
+        <div class="row mt-4">
+            <div class="col-md-4 step-item">
+                <i class="fas fa-check-circle step-icon"></i>
+                <h4 class="step-title">Klik Tombol <br> Clasifikasi now</h4>
+                <p class="step-desc">Memulai proses pencarian batik <br>berdasarkan gambar otomatis <br> akurat dan terpercaya.</p>
+            </div>
+            <div class="col-md-4 step-item">
+                <i class="fas fa-check-circle step-icon"></i>
+                <h4 class="step-title">Cari Gambar dari <br> penyimpanan lokal</h4>
+                <p class="step-desc">Setelah tombol di klik, <br> anda akan diminta untuk mengunggah  <br> gambar batik dari penyimpanan anda.</p>
+            </div>
+            <div class="col-md-4 step-item">
+                <i class="fas fa-check-circle step-icon"></i>
+                <h4 class="step-title">Menampilkan Hasil <br> Produk Batik Terkait</h4>
+                <p class="step-desc">Sistem akan memproses dan  menampilkan <br> hasil produk terkait batik yang relevan dengan <br> gambar yang anda unggah.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="upload-section" class="container mt-5">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+        <!-- Card Utama (Upload Gambar) -->
+        <div class="upload-container shadow-lg rounded text-muted p-4 position-relative"
+            style="flex: 2; height: 350px;">
+            <h5><i class="fas fa-upload text-warning"></i> Unggah Gambar</h5>
+            <form action="/predict" method="post" enctype="multipart/form-data" class="form-inline mt-3">
+                <div class="upload-area" id="uploadArea">
+                    <label for="fileInput" class="upload-label">
+                        <i class="fas fa-cloud-upload-alt "></i> <br>
+                        Drag & Drop Files <br>  Or
+                    </label>
+                <button type="button" class="btn btn-primary browse-btn" onclick="document.getElementById('fileInput').click();">Browse</button>
+                <input type="file" id="fileInput" name="file" class="file-input" accept="image/*">
+                </div>
+                <button type="submit" class="btn btn-warning mt-4">Classify</button>
+            </form>
+
+            <!-- Card Hasil (Tumpang Tindih dengan Tinggi yang Sama) -->
+            <div class="prediction-container text-dark p-4 position-absolute"
+                style="width: 80%; height: 100%; top: 30%; left: 50%; ">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-chart-pie fa-3x text-warning mr-3"></i>
+                    <div  style="font-weight: bold; margin-right: 40px;">
+                        <h5 style="font-weight: bold; margin-right: 20px;">Hasil Prediksi</h5>
+                        {% if prediction %}
+                        <p><strong style="font-weight: bold;">Kategori:</strong> {{ prediction }}</p>
+                        {% else %}
+                        <p><em>Belum ada hasil prediksi. <br> Silakan lakukan prediksi.</em></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabel (Orang-Orang Juga Melakukan Prediksi) -->
+        <div class="shadow-lg rounded bg-light text-muted p-3" style="flex: 1; max-width: 400px; margin-top: -3px;">
+            <h5><i class="fas fa-users text-warning"></i> Orang-Orang Juga Melakukan Prediksi</h5>
+            <div class="table-responsive mt-3" style="max-height: 286px; overflow-y: auto;">
+                <table class="table table-striped mt-3 table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center">Kategori Prediksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if history %}
+                        {% for record in history %}
+                        <tr>
+                            <td class="text-center">{{ record.predicted_class }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td class="text-center" colspan="2"><em>Belum ada data historis.</em></td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Hot Products Section -->
+<div class="container mt-5">
+    <h3>HOT PRODUCT</h3>
+    <div class="row">
+        {% for product in products[:8] %} <!-- Batas hanya 8 produk (2x4) -->
+        <div class="col-3 mb-4"> <!-- 4 produk per baris -->
+            <div class="card position-relative" style="border: none; border-radius: 0">
+                <!-- Label Sale di sudut kanan atas -->
+                <div class="position-absolute"
+                    style="top: 10px; right: 10px; background: rgb(233, 32, 18); color: white; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                    SALE
+                </div>
+                <!-- Gambar pertama dari product.images -->
+                {% if product.images and product.images[0].image_path %}
+                <img src="{{ url_for('static', filename=product.images[0].image_path.split('static/')[1]) }}"
+                    class="card-img-top" style="width: 90%; margin: 0 auto;" alt="{{ product.name }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='default_image.jpg') }}" class="card-img-top"
+                    style="width: 90%; margin: 0 auto;" alt="Default Image">
+                {% endif %}
+                <div class="card-body text-center"> <!-- Teks di tengah -->
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Category<br>{{
+                        product.category }}</p>
+                    <p class="card-text fw-bold">Rp{{
+                        "{:,}".format(product.price) }}</p>
+                </div>
+                <!-- Tombol di bagian bawah kartu -->
+                <div class="d-flex justify-content-between position-absolute w-100"
+                    style="bottom: 0; background: rgba(255, 255, 255, 0.8); padding: 0; height: 50px;">
+                    <a href="#" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center border-0"
+                        style="width: 24%; height: 100%; border-radius: 0; background-color: #8B0000;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#"
+                        class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center border-0"
+                        style="width: 75%; height: 100%; border-radius: 0; background-color: #814c29;">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 4 == 0 %}
+        <div class="w-100"></div> <!-- Baris baru setelah 4 produk -->
+        {% endif %}
+        {% endfor %}
+    </div>
+
+<div class="container mt-5">
+    <div class="row">
+        {% for product in hot_products %}
+        <div class="col-3 mb-4">
+            <div class="card position-relative" style="border: none; border-radius: 0">
+                <div class="position-absolute"
+                    style="top: 10px; right: 10px; background: rgb(233, 32, 18); color: white; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                    SALE
+                </div>
+                {% if product.images and product.images[0].image_path %}
+                <img src="{{ url_for('static', filename=product.images[0].image_path.split('static/')[1]) }}"
+                    class="card-img-top" style="width: 90%; margin: 0 auto;" alt="{{ product.name }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='default_image.jpg') }}" class="card-img-top"
+                    style="width: 90%; margin: 0 auto;" alt="Default Image">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Category: {{ product.category }}</p>
+                    <p class="card-text fw-bold">Rp {{ "{:,}".format(product.price) }}</p>
+                </div>
+                <div class="d-flex justify-content-between position-absolute w-100"
+                    style="bottom: 0; background: rgba(255, 255, 255, 0.8); padding: 0; height: 50px;">
+                    <a href="#" class="btn btn-primary btn-sm d-flex align-items-center justify-content-center border-0"
+                        style="width: 24%; height: 100%; border-radius: 0; background-color: #8B0000;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <a href="#"
+                        class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center border-0"
+                        style="width: 75%; height: 100%; border-radius: 0; background-color: #814c29;">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+    <!-- Tombol View All di bawah -->
+    <div class="text-center mt-4">
+        <a href="#" class="btn btn-outline-primary border-0"
+            style="border-radius: 0; background-color: #8B0000; color: white;">View
+            All</a>
+    </div>
+</div>
+                
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Galeri Batik. All Rights Reserved.</p>
+    </footer>
+<script>
+
+
+    document.getElementById('uploadArea').addEventListener('dragover', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.style.backgroundColor = '#f1f1f1';
+        });
+
+        document.getElementById('uploadArea').addEventListener('dragleave', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.style.backgroundColor = '';
+        });
+
+        document.getElementById('uploadArea').addEventListener('drop', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.target.style.backgroundColor = '';
+
+            const files = event.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('fileInput').files = files;
+            }
+        });
+</script>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+          <script>
+          // Mengubah data dari Flask ke JavaScript
+                    const historyData = JSON.parse('{{ history | tojson | safe }}') || [];
+                    const classCount = JSON.parse('{{ class_count | tojson | safe }}') || {};
+
+                    // Diagram Lingkaran (Pie Chart)
+                    const pieLabels = Object.keys(classCount);
+                    const pieData = Object.values(classCount);
+
+                    if (pieLabels.length > 0 && pieData.length > 0) {
+                              const ctxPie = document.getElementById('pieChart').getContext('2d');
+                              new Chart(ctxPie, {
+                                        type: 'pie',
+                                        data: {
+                                                  labels: pieLabels,
+                                                  datasets: [{
+                                                            data: pieData,
+                                                            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF5733']
+                                                  }]
+                                        },
+                                        options: {
+                                                  animation: {
+                                                            duration: 2000,
+                                                            easing: 'easeInOutBounce'
+                                                  }
+                                        }
+                              });
+                    }
+
+                    // Diagram Batang (Bar Chart)
+                    const barLabels = Object.keys(classCount);
+                    const barData = Object.values(classCount);
+
+                    if (barLabels.length > 0 && barData.length > 0) {
+                              const ctxBar = document.getElementById('barChart').getContext('2d');
+                              new Chart(ctxBar, {
+                                        type: 'bar',
+                                        data: {
+                                                  labels: barLabels,
+                                                                      datasets: [{
+                                                            label: 'Jumlah Klasifikasi',
+                                                            data: barData,
+                                                            backgroundColor: [
+                                                                      '#FF5733',
+                                                                      '#36A2EB',
+                                                                      '#FFCE56',
+                                                                      '#4BC0C0',
+                                                                      '#9966FF',
+                                                                      '#FF6384'
+                                                            ]
+                                                  }]
+                                        },
+                                        options: {
+                                                  responsive: true,
+                                                  scales: {
+                                                            x: { beginAtZero: true }
+                                                  },
+                                                  animation: {
+                                                            duration: 2000,
+                                                            easing: 'easeInOutElastic'
+                                                  },
+                                                  plugins: {
+                                                            tooltip: {
+                                                                      backgroundColor: 'rgba(0,0,0,0.7)',
+                                                                      titleColor: '#FFFFFF',
+                                                                      bodyColor: '#FFFFFF'
+                                                            }
+                                                  }
+                                        }
+                              });
+                    }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

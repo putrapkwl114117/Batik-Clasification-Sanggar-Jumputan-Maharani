@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Galeri Batik</title>
+
+          <!-- Favicon -->
+          <link rel="icon" href="{{ url_for('static', filename='uploadsImg/logo.png') }}" type="image/x-icon">
+
+          <!-- Bootstrap CSS -->
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+          <!-- Font Awesome Icons -->
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+          <!-- Custom CSS -->
+          <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+
+<body class="custom-bg1 text-muted">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          <div class="container mt-3">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                              {{ message }}
+                              <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+          </div>
+          {% endif %}
+          {% endwith %}
+
+          {% include 'navbar.html' %}
+
+
+
+<div class="container mt-5 gallery-section">
+          <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                              {% for i in range(0, categories|length, 6) %}
+                              <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                                        <div class="d-flex justify-content-start flex-nowrap">
+                                                  {% for category in categories[i:i+6] %}
+                                                  <img src="{{ url_for('static', filename=category.first_image.split('static/')[1]) }}"
+                                                            class="img-thumbnail mx-2 hover-img" style="width: 150px; height: 250px;">
+                                                  {% endfor %}
+                                        </div>
+                              </div>
+                              {% endfor %}
+                    </div>
+
+                    <!-- Tombol Previous -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                    </button>
+                    
+                    <!-- Tombol Next -->
+                    <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                    </button>
+                    
+                    <!-- Indikator Carousel -->
+                    <div class="carousel-indicators">
+                              {% for i in range(0, (categories|length + 5) // 6) %}
+                              <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="{{ i }}" {% if i==0 %}
+                                        class="active" aria-current="true" {% endif %} aria-label="Slide {{ i + 1 }}">
+                              </button>
+                              {% endfor %}
+                    </div>
+          </div>
+</div>
+
+          <!-- Categories Section -->
+<div class="container mt-5">
+          <h3 class="text-center font-weight-bold">Categories</h3>
+          <h5 class="text-center">Browse our website for the hottest items in the marketplace now</h5>
+          <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                              {% for i in range(0, categories|length, 5) %}
+                              <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                                        <div class="d-flex justify-content-between">
+                                                  {% for category, first_image in categories[i:i+5] %}
+                                                  <div class="text-center mx-1 category-card">
+                                                            <div class="category-img-wrapper">
+                                                                      {% if first_image %}
+                                                                      <img src="{{ url_for('static', filename=first_image.split('static/')[1]) }}"
+                                                                                class="img-thumbnail category-img"
+                                                                                alt="{{ category }}">
+                                                                      {% else %}
+                                                                      <img src="{{ url_for('static', filename='default_image.jpg') }}"
+                                                                                class="img-thumbnail category-img"
+                                                                                alt="Default Image">
+                                                                      {% endif %}
+                                                                      <div class="category-name">{{ category
+                                                                                }}</div>
+                                                            </div>
+                                                  </div>
+                                                  {% endfor %}
+                                        </div>
+                              </div>
+                              {% endfor %}
+                    </div>
+
+                    <!-- Kontrol Carousel -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel"
+                              data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel"
+                              data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                    </button>
+          </div>
+</div>
+                    <!-- Hot Products Section -->
+<div class="container mt-5">
+          <h3>HOT PRODUCT</h3>
+          <div class="row">
+                    {% for product in products[:8] %} <!-- Batas hanya 8 produk (2x4) -->
+                    <div class="col-3 mb-4"> <!-- 4 produk per baris -->
+                              <div class="card position-relative"
+                                        style="border: none; border-radius: 0">
+                                        <!-- Label Sale di sudut kanan atas -->
+                                        <div class="position-absolute"
+                                                  style="top: 10px; right: 10px; background: rgb(233, 32, 18); color: white; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                                  SALE
+                                        </div>
+                                        <!-- Gambar pertama dari product.images -->
+                                        {% if product.images and product.images[0].image_path %}
+                                        <img src="{{ url_for('static', filename=product.images[0].image_path.split('static/')[1]) }}"
+                                                  class="card-img-top"
+                                                  style="width: 90%; margin: 0 auto;"
+                                                  alt="{{ product.name }}">
+                                        {% else %}
+                                        <img src="{{ url_for('static', filename='default_image.jpg') }}"
+                                                  class="card-img-top"
+                                                  style="width: 90%; margin: 0 auto;"
+                                                  alt="Default Image">
+                                        {% endif %}
+                                        <div class="card-body text-center"> <!-- Teks di tengah -->
+                                                  <h5 class="card-title">{{ product.name }}</h5>
+                                                  <p class="card-text">Category<br>{{
+                                                            product.category }}</p>
+                                                  <p class="card-text fw-bold">Rp{{
+                                                            "{:,}".format(product.price) }}</p>
+                                        </div>
+                                        <!-- Tombol di bagian bawah kartu -->
+                                        <div class="d-flex justify-content-between position-absolute w-100"
+                                                  style="bottom: 0; background: rgba(255, 255, 255, 0.8); padding: 0; height: 50px;">
+                                                  <a href="#"
+                                                            class="btn btn-primary btn-sm d-flex align-items-center justify-content-center border-0"
+                                                            style="width: 24%; height: 100%; border-radius: 0; background-color: #8B0000;">
+                                                            <i class="fas fa-shopping-cart"></i>
+                                                  </a>
+                                                  <a href="#"
+                                                            class="btn btn-secondary btn-sm d-flex align-items-center justify-content-center border-0"
+                                                            style="width: 75%; height: 100%; border-radius: 0; background-color: #814c29;">
+                                                            View
+                                                  </a>
+                                        </div>
+                              </div>
+                    </div>
+                    {% if loop.index % 4 == 0 %}
+                    <div class="w-100"></div> <!-- Baris baru setelah 4 produk -->
+                    {% endif %}
+                    {% endfor %}
+          </div>
+          <!-- Tombol View All di bawah -->
+          <div class="text-center mt-4">
+                    <a href="#" class="btn btn-outline-primary border-0"
+                              style="border-radius: 0; background-color: #8B0000; color: white;">View
+                              All</a>
+          </div>
+</div>
+                    <!-- Footer -->
+                    <footer class="bg-dark text-white text-center py-3 mt-5">
+                              <p>&copy; 2024 Galeri Batik. All Rights Reserved.</p>
+                    </footer>
+
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

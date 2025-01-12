@@ -1,0 +1,201 @@
+/* Latar belakang tidak terlalu gelap */
+.custom-bg1 {
+    background-color: #aeb0b3; 
+    color: #d1d1d1;
+}
+
+.navbar_costum{
+     background: linear-gradient(to right, #724ef5, #022e5a);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); 
+}
+.navbar{
+     background: linear-gradient(to right, #8a90e2, #8a90e2);
+       border-bottom: 4px solid #393061; 
+}
+a {
+    color: #d1d1d1;
+}
+
+a:hover {
+    color: #f1f1f1;
+}
+
+.navbar-nav .nav-link {
+    font-weight: bold;  
+}
+
+  .carousel-img {
+      max-height: 666px; 
+      object-fit: cover;
+  }
+.nav-link{
+color: #f1f1f1;
+}
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: #198754 !important; 
+    border-bottom: 3px solid #198754;
+    padding-bottom: 5px; 
+}
+
+    .navbar-brand img {
+        margin-right: 20px;
+    }
+
+    .carousel-img {
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.075) 60%, rgba(0, 0, 0, 0.7) 100%);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+/* Mengatur gambar di carousel agar rapi */
+.img-thumbnail{
+    object-fit: cover; 
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    object-fit: cover; 
+    transition: transform 0.3s ease;
+}
+
+.gallery-section{
+    margin-left: 170px;
+}
+
+.hover-img {
+    transition: transform 0.3s ease-in-out; 
+}
+
+.hover-img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+
+/* Efek zoom saat hover */
+.img-thumbnail.gallery-img:hover {
+    transform: scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+.carousel-control-next{
+        right: 100px; 
+    }
+
+
+ .category-card {
+        max-width: 200px;
+    }
+
+    .category-img-wrapper {
+        position: relative;
+        height: 285px;
+        overflow: hidden;
+        width: 200px;
+        border-radius: 0;
+    }
+
+    .category-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+        transition: transform 0.3s ease;
+    }
+
+    .category-img-wrapper:hover .category-img {
+        transform: scale(1.05);
+    }
+
+    .category-name {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(228, 112, 92, 0.699); 
+        color: white;
+        padding: 5px;
+        text-align: center;
+        font-weight: bold;
+        box-sizing: border-box;
+    }
+
+.carousel-inner .d-flex > div {
+    flex: 1; 
+    margin: 0 2px; 
+}
+
+/* Hot Products Section */
+.container h5 {
+    font-size: 16px;
+    font-family:serif;
+    margin-bottom: 16px;
+    color: #333333b0;
+}
+
+/* Hot Products Section */
+.container h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Carousel Cards */
+.card {
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 0 10px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Gambar di dalam Card */
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+/* Efek Hover Card */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
